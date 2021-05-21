@@ -1,0 +1,45 @@
+{%extends 'base.html' %}
+{%block head%} 
+    <title>
+        TODO list
+    </title>   
+{% endblock %}
+{%block body%}
+    <div class="text-center">
+        <h1>
+            TODO List
+        </h1> 
+        <ul id='todoList' class="todo">
+            {%for task in data%}
+<!-- {{task}} -->
+                <li data-task_id="{{task.id}}" class="{{ loop.cycle('odd', 'even') }}"
+                    data-name="{{task.name}}"
+                    data-cont="{{task.content}}"
+                    data-prog="{{task.prog}}">
+                    <!-- <div class="font-weight-bold">{{loop.index}}</div> -->
+                    <div class='li-container'>
+                        <div class="task-id text-left">
+                            ID: {{task.id}}
+                            <span id='btnEdit_{{task.id}}' class="btn btn-edit">&checkmark;</span>
+                            <span id='btnDelete_{{task.id}}' class="btn btn-delete">&cross;</span>                              
+                        </div>
+                        <div class="task-name font-weight-bold">
+                            {{task.name}}
+                        </div>
+
+                        <div class="task-desc">
+                            {{task.content}}
+                        </div>
+
+                        <div class="task-prog">Overall Progress: {{task.prog}}%
+                            <span class="prog-bar" data-prog="{{task.prog}}%"></span>
+                        </div>                    
+
+                    </div>                    
+
+                </li>
+            {%endfor%}
+        </ul>        
+    </div>
+
+{% endblock %}
