@@ -1,34 +1,30 @@
 import React, { Component } from 'react';
 
-import ShoppingCart from './shoppingCart';
 import Navbar from './navbar';
 import { Redirect, Route, Switch } from 'react-router';
 
 
-import ProductDetails from './pages/productDetails';
 import NotFound from './pages/notFound';
-import Menue from './pages/menue';
 
-import Login from './login';
 import axios from 'axios';
-import TodoList from './pages/todos';
+import TodoList from './pages/todoList';
 import TODOForm from './pages/todoForm';
 
 class App extends Component {
     state = { 
-        todos:[
-            {id: 1, title: 'Web development', done:false},
-            {id: 2, title: 'Web development', done:false},
-            {id: 3, title: 'Web development', done:false}
-        ]
+        todos:[]
+        //     {id: 1, title: 'Web development', done:false},
+        //     {id: 2, title: 'Web development', done:false},
+        //     {id: 3, title: 'Web development', done:false}
+        // ]
     }     
-    APIURL='http://localhost:3000/todos'
+    APIURL='http://127.0.0.1:5000/todos'
     async componentDidMount(){
-        // const {data}  = await axios.get(this.APIURL)
-        // this.setState({products: data})
-
+        const {data}  = await axios.get(this.APIURL)
+        console.log('get request data', data);
+        this.setState({todos: data})
     }
-    deleteProduct = async(pr) => {
+    deleteTodo = async(t) => {
         // await axios.delete(`${this.APIURL}/${pr.id}`)
     }
     toggleCart = (pr) => {
@@ -93,6 +89,7 @@ class App extends Component {
                         <TodoList
                             {...props}
                             todos={this.state.todos}
+                            
                         />
                     }  />
 

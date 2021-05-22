@@ -13,8 +13,12 @@ class SingleTask extends Component {
         return (  
             <>
                 <td>{t.id}</td>
-                <td>{t.title}</td>
-                <td>{t.done}</td>
+                <td>{t.name}</td>
+                <td>{t.content}</td>
+                <td>
+                <input className="form-check-input" type="checkbox" value={t.done} id="flexCheckDefault" />
+
+                </td>
                 <td>
                     <i className="fas fa-edit" onClick={()=>this.editTODO(t)}></i>
                 </td>

@@ -5,12 +5,15 @@ class TodoList extends Component {
     state = {  }
     addProduct = () =>{
         console.log(this.props)
-        this.props.history.push('productform/new')
+        this.props.history.push('todoform/new')
     }
+    // handleDelete = t=>{
+    //     await axios.delete(`${this.APIURL}/${t.id}`)
+    // }
     render() {         
         
         const props = this.props
-
+        // console.log('props in todolist', props)
         return (  
         <>
         <h1>Todo List Page</h1>
@@ -23,19 +26,21 @@ class TodoList extends Component {
                 <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Price</th>
+                <th scope="col">Content</th>
                 <th scope="col">...</th>
                 <th scope="col">...</th>
                 </tr>
             </thead>
             <tbody>
             {
+                
                 props.todos.map( t => {
                     // {console.log('single todo', t)}
                     return(
                         <tr key={t.id}>
                             <SingleTask
                                 {...props}
+                                // onDelete={()=>this.handleDelete(t)}
                                 todo={t} />
                         </tr>
                     )

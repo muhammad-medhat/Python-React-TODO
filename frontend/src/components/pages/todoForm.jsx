@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 class TODOForm extends Component {
-    APIURL = 'http://localhost:3000/products'
-    state = { title: '', done: false  }
+    APIURL = 'http://localhost:5000/todos'
+    state = { name: '', content: '', done: false  }
     submitForm = (e)=>{
         e.preventDefault()
         const id = this.props.match.params.id
@@ -10,10 +10,10 @@ class TODOForm extends Component {
             console.log('Submiting...', this.state)
             if(id !== 'new'){
                 //Editing               
-                this.editProduct()
+                this.editTodo()
             } else{
                 //Adding
-                this.addProduct()
+                this.addTodo()
             }
             this.props.history.replace('/admin')
             // 
@@ -38,11 +38,11 @@ class TODOForm extends Component {
     validate =  ()=>{return true}
 
 
-    addProduct = async () => {
-        const obj = {...this.state,  done: false}
+    addTodo = async () => {
+        const obj = {...this.state}
         await axios.post(this.APIURL, obj)
     }
-    editProduct = async () => {
+    editTodo = async () => {
         const id = this.props.match.params.id
 
         const obj = {...this.state, done: false}
