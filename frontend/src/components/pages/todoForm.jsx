@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-class ProductForm extends Component {
+class TODOForm extends Component {
     APIURL = 'http://localhost:3000/products'
-    state = { name: '', price: ''  }
+    state = { title: '', done: false  }
     submitForm = (e)=>{
         e.preventDefault()
         const id = this.props.match.params.id
@@ -20,14 +20,14 @@ class ProductForm extends Component {
         }
         
     }
-    async componentDidMount(){
-        const id = this.props.match.params.id
-        if(id !== 'new'){
-            const {data} = await axios.get(`${this.APIURL}/${id}`)
-            this.setState({...data})
-            console.log('state', this.state)
-        }
-    }
+    // async componentDidMount(){
+    //     const id = this.props.match.params.id
+    //     if(id !== 'new'){
+    //         const {data} = await axios.get(`${this.APIURL}/${id}`)
+    //         this.setState({...data})
+    //         console.log('componentDidMount state', this.state)
+    //     }
+    // }
     handleChange = (e) =>{
         let st = {...this.state}
         // console.log('OnChange', e);
@@ -39,45 +39,45 @@ class ProductForm extends Component {
 
 
     addProduct = async () => {
-        const obj = {...this.state, nmbr: 0, inCart: false}
+        const obj = {...this.state,  done: false}
         await axios.post(this.APIURL, obj)
     }
     editProduct = async () => {
         const id = this.props.match.params.id
 
-        const obj = {...this.state, nmbr: 0, inCart: false}
+        const obj = {...this.state, done: false}
         delete obj.id
         await axios.patch(`${this.APIURL}/${id}`, obj)    }
     render() { 
         const id = this.props.match.params.id
-        let title = ''
+        console.log ('todo form', this.state)
+        let heading = ''   
+        console.log('props', this.props);
+
         if(id !== 'new'){
-            console.log('props', this.props);
-            title = `Edit Product (${id})`
+            heading = `Edit Todo (${id})`
             //this.setState({name:})
         } else{
-            title = 'Add Product'
+            heading = 'Add Todo'
         }
         
-
-        //const pName = (id === 'new')? '': 
         return ( 
             <>
-                <h1>{title}</h1>
+                <h1>{heading}</h1>
 
                 <form>
-                    <div class="form-group">
-                        <label for="txtName">Product Name</label>
-                        <input type="text" class="form-control"
+                    <div className="form-group">
+                        <label htmlFor="txtName">Todo Name</label>
+                        <input type="text" className="form-control"
                             id="txtName" 
                             name="name"
                             placeholder="Enter Name"
                             onChange={this.handleChange}
-                            value={this.state.name}  />
+                            value={this.state.title}  />
                     </div>
-                    <div class="form-group">
-                        <label for="txtPrice">Price</label>
-                        <input type="number" class="form-control" 
+                    <div className="form-group">
+                        <label htmlFor="txtPrice">Price</label>
+                        <input type="number" className="form-control" 
                             id="txtPrice" 
                             name="price" 
                             placeholder="Price"
@@ -85,11 +85,11 @@ class ProductForm extends Component {
                             value={this.state.price}  />
 
                     </div>
-                    <button type="submit" class="btn btn-primary" onClick={this.submitForm}>Submit</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.submitForm}>Submit</button>
                 </form>
             </>
           );
     }
 }
  
-export default ProductForm;
+export default TODOForm;

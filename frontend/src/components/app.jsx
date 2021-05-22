@@ -12,7 +12,7 @@ import Menue from './pages/menue';
 import Login from './login';
 import axios from 'axios';
 import TodoList from './pages/todos';
-import ProductForm from './pages/productForm';
+import TODOForm from './pages/todoForm';
 
 class App extends Component {
     state = { 
@@ -96,8 +96,8 @@ class App extends Component {
                         />
                     }  />
 
-                    <Route path='/productform/:id' component={ProductForm} />
-                    <Route path='/login' component={Login} />
+                    <Route path='/todoform/:id' component={TODOForm} />
+                    
 
                     <Route path='/notfound' component={NotFound} />
                     <Redirect to='/notfound'  />

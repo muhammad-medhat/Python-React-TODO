@@ -5,6 +5,8 @@ from datetime import datetime
 # from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.sql.expression import false
+from flask_migrate import Migrate
+
 
 
 import database_sqlite, database_setup 
@@ -12,10 +14,11 @@ import sys
 import sqlite3
 import functions as fns
 
-sql_alchemy=False
+sql_alchemy=True
 app = Flask(__name__)
 if sql_alchemy:
     database_setup.setup_db(app)
+    # print(dir(app))
     # database_setup.db_drop_and_create_all()
 
 
@@ -23,7 +26,6 @@ if sql_alchemy:
 # connect the __init__.py to the database
 # engine = create_engine('sqlite:///the_database.db')
 
-database_sqlite
 
 
 

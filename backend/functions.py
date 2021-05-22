@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker
 
 import database_sqlite, database_setup 
 #-------------------- Globals----------------------------------------
-sql_alchemy=False
+sql_alchemy=True
 #------------------------------------------------------------
 def switch_method(mthd, tid=''):
     # print(f'req type is ** {mthd} ** and tid is ** {tid} **')
@@ -37,9 +37,9 @@ def get_all():
     else:
         todo_list = database_sqlite.get_all()
     
-    # for t in todo_list:
-    #     print(type(t))
-    return render_template('index.html', data = todo_list)
+
+    return jsonify([t.format() for t in todo_list])
+    #return render_template('index.html', data = todo_list)
 
 def create():
     body = request.get_json()

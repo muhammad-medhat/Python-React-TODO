@@ -24,12 +24,7 @@ class Navbar extends Component {
                                     </span>
                                 }
                             </li>
-                            {/* <li className="nav-item">
-                                <NavLink className="nav-link" to="/main">Admin</NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/login">Login</NavLink>
-                            </li> */}
+
                         </ul>
                     </div>
                     

@@ -3,21 +3,20 @@ import React, { Component } from 'react';
 
 class SingleTask extends Component {
     state = {  }
-    editProduct = (p)=>{
-        console.log('edit', p)
-        this.props.history.replace(`/productform/${p.id}`)
+    editTODO = (t)=>{
+        console.log('edit', t)
+        this.props.history.replace(`/todoform/${t.id}/${t.title}`)
     }
     render() { 
-        // console.log('single task', this.props)   ;
         const t = this.props.todo
-        console.log(t);
+       // console.log(t);
         return (  
             <>
                 <td>{t.id}</td>
                 <td>{t.title}</td>
                 <td>{t.done}</td>
                 <td>
-                    <i className="fas fa-edit" onClick={()=>this.editProduct(t)}></i>
+                    <i className="fas fa-edit" onClick={()=>this.editTODO(t)}></i>
                 </td>
                 <td><i className="far fa-trash-alt"></i></td>
                 
