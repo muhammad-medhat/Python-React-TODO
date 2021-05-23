@@ -8,7 +8,9 @@ class Navbar extends Component {
         return (  
             <>
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <span className="navbar-brand mb-0 h1 m-2">Logo</span>
+                <span className="navbar-brand mb-0 h1 m-2">
+                    <i className="fas fa-tasks"></i>
+                </span>
 
                     <div className="collapse navbar-collapse" id="navbarText">
                         <ul className="navbar-nav mr-auto m">
@@ -19,7 +21,6 @@ class Navbar extends Component {
                                 {
                                     
                                     <span className="badge btn-primary">
-                                        <i className="fas  fa-tasks"></i>
                                         {this.props.numTODO}
                                     </span>
                                 }

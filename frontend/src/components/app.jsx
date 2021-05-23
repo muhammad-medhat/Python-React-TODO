@@ -9,6 +9,7 @@ import NotFound from './pages/notFound';
 import axios from 'axios';
 import TodoList from './pages/todoList';
 import TODOForm from './pages/todoForm';
+import { toast } from 'react-toastify';
 
 class App extends Component {
     state = { 
@@ -21,57 +22,50 @@ class App extends Component {
     APIURL='http://127.0.0.1:5000/todos'
     async componentDidMount(){
         const {data}  = await axios.get(this.APIURL)
-        console.log('get request data', data);
+        //console.log('get request', data);
         this.setState({todos: data})
     }
-    deleteTodo = async(t) => {
-        // await axios.delete(`${this.APIURL}/${pr.id}`)
-    }
-    toggleCart = (pr) => {
-        // console.log('add to cart...', pr);
-        // const prods = [...this.state.todos]
-        // const idx = prods.indexOf( pr)
-        // const prod = prods[idx]
-        // prod.inCart = !pr.inCart
-        // this.setState({products: prods})
+
+    handleDelete = async (t) => {
+        const oldTodos = [...this.state.todos];
+    
+        //State
+        //Clone
+        //Edit 
+        const todos = this.state.todos.filter((s) => s.id !== t.id);
+        //Set state
+        this.setState({ todos });
+    
+        try {
+          //Call B
+            await axios.delete( `${this.APIURL}/${t.id}` );
+        } catch (ex) {
+          toast("Cant Delete");
+          this.setState({ todos: oldTodos });
+        }
+    };
+
+    handleInsert = async(t) => {
+        const oldTodos = [...this.state.todos];
+    
+        //State
+        //Clone
+        //Edit 
+        const todos = this.state.todos.push(t)
+        //Set state
+        this.setState({ todos });
+
+        // try {
+        //     //Call B
+        //     const obj = t
+        //       await axios.post( `${this.APIURL}/${t.id}`, obj );
+        //   } catch (ex) {
+        //     toast("Cant Delete");
+        //     this.setState({ todos: oldTodos });
     }
 
-    decHandler = (prod) => {
-        // const prods = [...this.state.todos]
-        // const idx = prods.indexOf( prod)
-        // const p = prods[idx]
-        // // console.log(p);
-        // p.nmbr--
-        // this.setState({products: prods})
-        // console.log('dnc',prods)
-    }
-    incHandler = (prod) => {
-        // console.log('increase', prod);
-        // const prods = [...this.state.todos]
-        // const idx = prods.indexOf( prod)
-        // const p = prods[idx]
-        // // console.log(p);
-        // p.nmbr++
-        // this.setState({products: prods})
-        // console.log('inc',prods)
-    }
-    deleteProduct = (p) =>{
-        // console.log('Deleting', p);
-        // const newProducts = this.state.todos.filter(pr => pr.id!== p.id)
-        // this.setState({products: newProducts})
-    }
-    reset = () => {
-        // console.log('reset');
-        // let products = [...this.state.todos]
-        // console.log('pppp bef',products);
 
-        // products =  products.map(p=>{
-        //     p.nmbr = 0
-        //     return p
-        // })
-        // console.log('pppp aft',products);
-        // this.setState({products})
-    }
+
     cloneReturnSingle=(prod)=>{
         const prods = [...this.state.todos]
         const idx = prods.indexOf( prod)
@@ -89,7 +83,9 @@ class App extends Component {
                         <TodoList
                             {...props}
                             todos={this.state.todos}
-                            
+                            onDelete={this.handleDelete}
+                            onInsert={this.handleInsert}
+
                         />
                     }  />
 

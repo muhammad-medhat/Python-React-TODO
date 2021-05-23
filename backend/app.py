@@ -14,25 +14,12 @@ import sys
 import sqlite3
 import functions as fns
 
-sql_alchemy=True
 app = Flask(__name__)
-if sql_alchemy:
-    database_setup.setup_db(app)
-    # print(dir(app))
-    # database_setup.db_drop_and_create_all()
+database_setup.setup_db(app)
+# print(dir(app))
+# database_setup.db_drop_and_create_all()
 
 
-
-# connect the __init__.py to the database
-# engine = create_engine('sqlite:///the_database.db')
-
-
-
-
-# @app.route('/')
-# def index(): 
-#     req = fns.get_req()
-#     return fns.switch_method(req)
 
 @app.route('/todos', methods=['get', 'POST'])
 def add_task():

@@ -5,6 +5,7 @@ class TODOForm extends Component {
     state = { name: '', content: '', done: false  }
     submitForm = (e)=>{
         e.preventDefault()
+        console.log('props todo form', this.props);
         const id = this.props.match.params.id
         if (this.validate()) {
             console.log('Submiting...', this.state)
@@ -15,7 +16,7 @@ class TODOForm extends Component {
                 //Adding
                 this.addTodo()
             }
-            this.props.history.replace('/admin')
+            this.props.history.replace('/todos')
             // 
         }
         

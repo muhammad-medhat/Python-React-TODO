@@ -3,7 +3,7 @@ from sqlalchemy import Column, String, Integer
 from sqlalchemy.sql.sqltypes import Boolean
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
+from flask_cors import CORS
 import json
 
 database_filename = "data.db"
@@ -11,6 +11,7 @@ project_dir = os.path.dirname(os.path.abspath(__file__))
 database_path = "sqlite:///{}".format(
             os.path.join(project_dir, database_filename)
         )
+print('os path', os.path)
 # print('file is ', __file__)
 # print('proj dir', project_dir)
 # print('db path', database_path)
@@ -30,6 +31,7 @@ def setup_db(app):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     migrate = Migrate(app, db)
+    CORS(app)
     db.init_app(app)
 
 

@@ -102,9 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
-
+######################################################
+#######################   #backend
 #Python 
 __pycache__
 .vscode
-.env
 venv

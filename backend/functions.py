@@ -32,6 +32,7 @@ def get_req():
 
 
 def get_all():
+    print('Get all')
     if sql_alchemy:
         todo_list = database_setup.TODO.select_all()
     else:
@@ -42,6 +43,7 @@ def get_all():
     #return render_template('index.html', data = todo_list)
 
 def create():
+    print('create todo')
     body = request.get_json()
     # print(body)    
     name = body.get("name", None)
@@ -62,6 +64,8 @@ def create():
     })
 
 def update(task_id):
+    print('update todo')
+
     body = request.get_json()
     # print(body)
     
@@ -86,6 +90,7 @@ def update(task_id):
     })
 
 def delete(task_id):
+    print('delete todo')
     if sql_alchemy:
         database_setup.TODO.delete(database_setup.TODO.query.get(task_id))
     else:
