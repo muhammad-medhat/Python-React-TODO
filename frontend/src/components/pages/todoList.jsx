@@ -1,9 +1,9 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React ,{ Component} from 'react';
 // import SingleTask from './singleTask';
 
 class TodoList extends Component {
-    state = {  }
+    state = {id:'',  name: '', content: '', prog: 0, done: false }
     APIURL='http://127.0.0.1:5000/todos'
 
     addTodo = (e) =>{
@@ -15,14 +15,7 @@ class TodoList extends Component {
             const t = this.state
             console.log('insert', t);
             this.props.onInsert(t)
-            // const id = this.props.match.params.id
-            /**
-             * 
-             * 
-             * 
-             *  try to insert
-             * 
-             */
+ 
     
 
     }
@@ -33,16 +26,17 @@ class TodoList extends Component {
     handleChange = (e) =>{
         let st = {...this.state}
         // console.log('OnChange', e);
-        // console.log('OnChange', st);
         st[e.currentTarget.name] = e.currentTarget.value        
         this.setState(st)
+        console.log('OnChange', st);
     }
     render() {         
 
         const props = this.props
-        // console.log('props in todolist', props)
-        const{onDelete} = props
-        //console.log('ondel', onDelete);
+        console.log('props in todolist', props)
+        const{onDelete, onInsert, todos} = props
+        console.log('todoa list', typeof(todos));
+        // console.log('onIns', onInsert);
         return (  
         <>
         <h1>Todo List Page</h1>
@@ -72,7 +66,7 @@ class TodoList extends Component {
                     onChange={this.handleChange}></textarea>
             </div>        
             <button className="btn btn-primary"
-                onClick={this.addTodo}
+                onClick={()=>onInsert(this.state)}
                 >Add New Task </button>
             </form>
 

@@ -47,21 +47,34 @@ class App extends Component {
 
     handleInsert = async(t) => {
         const oldTodos = [...this.state.todos];
+        console.log('Inserting...', t);
     
         //State
         //Clone
         //Edit 
-        const todos = this.state.todos.push(t)
-        //Set state
-        this.setState({ todos });
+        this.state.todos.push(t) 
+        const todos = this.state.todos       
+        console.log('state todos', this.state.todos);
+        console.log('old', oldTodos)
+        console.log('after pushing', t);
+        console.log('new', todos)
 
-        // try {
-        //     //Call B
-        //     const obj = t
-        //       await axios.post( `${this.APIURL}/${t.id}`, obj );
-        //   } catch (ex) {
-        //     toast("Cant Delete");
-        //     this.setState({ todos: oldTodos });
+
+        //Set state
+        this.setState({ todos: todos });
+        // console.log('old', oldTodos);
+        // console.log('new', [...this.state.todos]);
+        // console.log('newstate', this.state);
+
+        try {
+            //Call B
+            const obj = t
+            await axios.post( `${this.APIURL}`, obj );
+        } catch (ex) {
+            toast("Cant Insert")
+            this.setState({ todos: oldTodos })
+        } 
+        
     }
 
 
