@@ -14,10 +14,6 @@ import { toast } from 'react-toastify';
 class App extends Component {
     state = { 
         todos:[]
-        //     {id: 1, title: 'Web development', done:false},
-        //     {id: 2, title: 'Web development', done:false},
-        //     {id: 3, title: 'Web development', done:false}
-        // ]
     }     
     APIURL='http://127.0.0.1:5000/todos'
     async componentDidMount(){
@@ -40,8 +36,8 @@ class App extends Component {
           //Call B
             await axios.delete( `${this.APIURL}/${t.id}` );
         } catch (ex) {
-          toast("Cant Delete");
-          this.setState({ todos: oldTodos });
+            toast("Cant Delete");
+            this.setState({ todos: oldTodos });
         }
     };
 
@@ -62,14 +58,40 @@ class App extends Component {
 
         //Set state
         this.setState({ todos: todos });
-        // console.log('old', oldTodos);
-        // console.log('new', [...this.state.todos]);
-        // console.log('newstate', this.state);
-
+    
         try {
             //Call B
             const obj = t
             await axios.post( `${this.APIURL}`, obj );
+        } catch (ex) {
+            toast("Cant Insert")
+            this.setState({ todos: oldTodos })
+        } 
+        
+    }
+
+    handleEdit = async(t) => {
+        const oldTodos = [...this.state.todos];
+        console.log('Editing...', t);
+    
+        //State
+        //Clone
+        //Edit 
+        this.state.todos.push(t) 
+        const todos = this.state.todos       
+        console.log('state todos', this.state.todos);
+        console.log('old', oldTodos)
+        console.log('after pushing', t);
+        console.log('new', todos)
+
+
+        //Set state
+        this.setState({ todos: todos });
+    
+        try {
+            //Call B
+            const obj = t
+            await axios.patch( `${this.APIURL}`, obj );
         } catch (ex) {
             toast("Cant Insert")
             this.setState({ todos: oldTodos })
@@ -98,6 +120,7 @@ class App extends Component {
                             todos={this.state.todos}
                             onDelete={this.handleDelete}
                             onInsert={this.handleInsert}
+                            onEdit={this.handleEdit}
 
                         />
                     }  />

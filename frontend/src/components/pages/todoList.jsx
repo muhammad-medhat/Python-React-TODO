@@ -1,6 +1,7 @@
 // import axios from 'axios';
 import React ,{ Component} from 'react';
 // import SingleTask from './singleTask';
+import EditableLabel from 'react-inline-editing';
 
 class TodoList extends Component {
     state = {id:'',  name: '', content: '', prog: 0, done: false }
@@ -25,24 +26,30 @@ class TodoList extends Component {
     }
     handleChange = (e) =>{
         let st = {...this.state}
-        // console.log('OnChange', e);
         st[e.currentTarget.name] = e.currentTarget.value        
         this.setState(st)
         console.log('OnChange', st);
+    }
+    _handleFocus(e){
+        console.log('Handle focus', e)
+    }
+    _handleFocusOutName(t){
+        console.log(this.state)
+    }
+    _handleFocusOutContent(t){
+        console.log(t)
     }
     render() {         
 
         const props = this.props
         console.log('props in todolist', props)
-        const{onDelete, onInsert, todos} = props
+        const{onDelete, onInsert, onEdit, todos} = props
         console.log('todoa list', typeof(todos));
         // console.log('onIns', onInsert);
         return (  
         <>
         <h1>Todo List Page</h1>
 
-
-      
             <form className='border1'>
             <div className="form-group">
                 <label htmlFor="exampleFormControlInput1">Task Name</label>
@@ -53,9 +60,9 @@ class TodoList extends Component {
                     placeholder="name@example.com"
                     value={this.state.name}
                     onChange={this.handleChange}
-                                                />
+                />
             </div>
-         
+
             <div className="form-group">
                 <label htmlFor="exampleFormControlTextarea1">Description</label>
                 <textarea className="form-control" 
@@ -90,13 +97,26 @@ class TodoList extends Component {
                         <tr key={t.id}>
 
                             <td>{t.id}</td>
-                            <td>{t.name}</td>
-                            <td>{t.content}</td>
+                            <td>
+                                <EditableLabel                                 
+                                    text={t.name}
+                                    onFocus={this._handleFocus}
+                                    onFocusOut={this._handleFocusOutName}
+                                        />
+                            </td>
+                            <td>
+                                <EditableLabel 
+                                    text={t.content}
+                                    onFocus={this._handleFocus}
+                                    onFocusOut={this._handleFocusOutContent}
+                                        />
+                            </td>
                             <td>
                                 <input className="form-check-input" type="checkbox" value={t.done} id="flexCheckDefault" />
                             </td>
                             <td>
-                                <i className="fas fa-edit" onClick={()=>this.editTODO(t)}></i>
+                                {/* <i className="fas fa-edit" onClick={()=>this.editTODO(t)}></i> */}
+                                <i className="fas fa-edit" onClick={()=>onEdit(t)}></i>
                             </td>
                             <td><i className="far fa-trash-alt" onClick={()=>onDelete(t)}></i></td>
                             {/* <SingleTask

@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 class TODOForm extends Component {
-    APIURL = 'http://localhost:5000/todos'
-    state = { name: '', content: '', done: false  }
+    //APIURL = 'http://localhost:5000/todos'
+    state = { id:'', name: '', content: '', prog: 0, done: false  }
     submitForm = (e)=>{
         e.preventDefault()
         console.log('props todo form', this.props);
@@ -12,7 +12,7 @@ class TODOForm extends Component {
             if(id !== 'new'){
                 //Editing               
                 this.editTodo()
-            } else{
+            } else{ 
                 //Adding
                 this.addTodo()
             }
