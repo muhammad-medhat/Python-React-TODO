@@ -57,7 +57,7 @@ class TodoList extends Component {
                     className="form-control" 
                     id="name" 
                     name="name" 
-                    placeholder="name@example.com"
+                    placeholder="Task Name"
                     value={this.state.name}
                     onChange={this.handleChange}
                 />

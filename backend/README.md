@@ -15,3 +15,9 @@ pip install -r requirements.txt
 
 This will install all of the required packages we selected within the `requirements.txt` file.
 
+### Running the server
+To run the app 
+```
+flask run
+```
+

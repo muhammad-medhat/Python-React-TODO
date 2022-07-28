@@ -129,7 +129,7 @@ class App extends Component {
                     
 
                     <Route path='/notfound' component={NotFound} />
-                    <Redirect to='/notfound'  />
+                    {/* <Redirect to='/notfound'  /> */}
 
                 </Switch>
 
